@@ -1,0 +1,26 @@
+{
+  "name": "flow",
+  "version": "1.0.0",
+  "description": "O Flow é um aplicação web para gerenciamento de tarefas pessoais, com foco em simplicidade e produtividade.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/douglashenrick/flow.git"
+  },
+  "keywords": [],
+  "author": "Douglas Henrick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/douglashenrick/flow/issues"
+  },
+  "homepage": "https://github.com/douglashenrick/flow#readme",
+  "dependencies": {
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
