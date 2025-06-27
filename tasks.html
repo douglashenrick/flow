@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Flow - Gerenciar suas tarefas acadêmicas"
+    />
+    <meta
+      name="keywords"
+      content="tarefas, produtividade, organização, todoist, academia"
+    />
+    <meta name="author" content="Aluno UTFPR" />
+
+    <title>Tarefas - Flow</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--  CSS  -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Barra de navegação -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top main-navbar">
+      <div class="container">
+        <a class="navbar-brand brand-logo" href="index.html">
+          <i class="fas fa-tasks brand-icon"></i>
+          <span class="brand-text">Flow</span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+                <i class="fas fa-home nav-icon"></i>
+                Início
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="tasks.html">
+                <i class="fas fa-list-check nav-icon"></i>
+                Tarefas
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">
+                <i class="fas fa-user nav-icon"></i>
+                Login
+              </a>
+            </li>
+          </ul>
+
+          <div class="navbar-nav">
+            <button
+              class="btn btn-primary-custom"
+              data-bs-toggle="modal"
+              data-bs-target="#taskModal"
+            >
+              <i class="fas fa-plus button-icon"></i>
+              Nova Tarefa
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="container">
+        <!-- Header -->
+        <div class="tasks-header">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <h1 class="page-title">
+                <i class="fas fa-list-check page-icon"></i>
+                Minhas Tarefas
+              </h1>
+              <p class="page-description">
+                Gerencie todas as suas tarefas acadêmicas em um só lugar
+              </p>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex justify-content-end gap-3">
+                <div class="search-container">
+                  <input
+                    type="text"
+                    id="task-search"
+                    class="form-control search-input"
+                    placeholder="Buscar tarefas..."
+                  />
+                  <i class="fas fa-search search-icon"></i>
+                </div>
+                <button class="btn btn-outline-primary" onclick="loadTasks()">
+                  <i class="fas fa-sync-alt"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- seção de filtro com bootstrap -->
+        <div class="filters-section">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <div class="filter-tabs">
+                <div class="btn-group" role="group">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="statusFilter"
+                    id="filter-all"
+                    value="all"
+                    checked
+                  />
+                  <label class="btn btn-outline-primary" for="filter-all">
+                    <i class="fas fa-list filter-icon"></i>
+                    Todas
+                  </label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="statusFilter"
+                    id="filter-pending"
+                    value="pending"
+                  />
+                  <label class="btn btn-outline-primary" for="filter-pending">
+                    <i class="fas fa-clock filter-icon"></i>
+                    Pendentes
+                  </label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="statusFilter"
+                    id="filter-completed"
+                    value="completed"
+                  />
+                  <label class="btn btn-outline-primary" for="filter-completed">
+                    <i class="fas fa-check-circle filter-icon"></i>
+                    Concluídas
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <select class="form-select priority-filter" id="priority-filter">
+                <option value="all">Todas as prioridades</option>
+                <option value="high">Alta prioridade</option>
+                <option value="medium">Média prioridade</option>
+                <option value="low">Baixa prioridade</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="tasks-content">
+          <div class="row">
+            <!-- Listagem de itens -->
+            <div class="col-lg-8">
+              <div class="tasks-container" id="tasks-container">
+                <div class="loading-state text-center">
+                  <div class="loading-spinner"></div>
+                  <p class="loading-text">Carregando tarefas...</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="sidebar-section">
+                <div class="card stats-card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="fas fa-chart-bar stats-icon"></i>
+                      Estatísticas
+                    </h5>
+                    <div class="stats-list">
+                      <div class="stat-item">
+                        <span class="stat-label">Total</span>
+                        <span class="stat-value" id="stat-total">0</span>
+                      </div>
+                      <div class="stat-item">
+                        <span class="stat-label">Pendentes</span>
+                        <span class="stat-value text-warning" id="stat-pending"
+                          >0</span
+                        >
+                      </div>
+                      <div class="stat-item">
+                        <span class="stat-label">Concluídas</span>
+                        <span
+                          class="stat-value text-success"
+                          id="stat-completed"
+                          >0</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card quick-actions-card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="fas fa-bolt stats-icon"></i>
+                      Ações Rápidas
+                    </h5>
+                    <div class="d-grid gap-2">
+                      <button
+                        class="btn btn-primary-custom"
+                        data-bs-toggle="modal"
+                        data-bs-target="#taskModal"
+                      >
+                        <i class="fas fa-plus button-icon"></i>
+                        Nova Tarefa
+                      </button>
+                      <button
+                        class="btn btn-outline-success"
+                        onclick="markAllCompleted()"
+                      >
+                        <i class="fas fa-check-double button-icon"></i>
+                        Marcar Todas como Feitas
+                      </button>
+                      <button
+                        class="btn btn-outline-danger"
+                        onclick="deleteCompleted()"
+                      >
+                        <i class="fas fa-trash button-icon"></i>
+                        Excluir Concluídas
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!--  Modal de tarefa usando Bootstrap -->
+    <div class="modal fade" id="taskModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-plus modal-icon"></i>
+              Nova Tarefa
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="task-form" class="task-form">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label for="task-title" class="form-label required-field"
+                      >Título da Tarefa</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="task-title"
+                      name="title"
+                      placeholder="Ex: Estudar para prova de matemática"
+                      required
+                      maxlength="100"
+                    />
+                    <div class="form-feedback"></div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="task-priority" class="form-label"
+                      >Prioridade</label
+                    >
+                    <select
+                      class="form-select"
+                      id="task-priority"
+                      name="priority"
+                    >
+                      <option value="low">Baixa</option>
+                      <option value="medium" selected>Média</option>
+                      <option value="high">Alta</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="task-description" class="form-label"
+                  >Descrição</label
+                >
+                <textarea
+                  class="form-control"
+                  id="task-description"
+                  name="description"
+                  rows="3"
+                  placeholder="Descreva os detalhes da tarefa..."
+                  maxlength="500"
+                ></textarea>
+                <div class="form-feedback"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="task-due-date" class="form-label"
+                      >Data de Vencimento</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="task-due-date"
+                      name="dueDate"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="task-category" class="form-label"
+                      >Categoria</label
+                    >
+                    <div class="category-options">
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="category"
+                          id="cat-academic"
+                          value="Acadêmico"
+                          checked
+                        />
+                        <label class="form-check-label" for="cat-academic"
+                          >Acadêmico</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="category"
+                          id="cat-personal"
+                          value="Pessoal"
+                        />
+                        <label class="form-check-label" for="cat-personal"
+                          >Pessoal</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="category"
+                          id="cat-work"
+                          value="Trabalho"
+                        />
+                        <label class="form-check-label" for="cat-work"
+                          >Trabalho</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              form="task-form"
+              class="btn btn-primary-custom"
+            >
+              <i class="fas fa-save button-icon"></i>
+              Salvar Tarefa
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="footer-brand">
+              <h5 class="footer-title">
+                <i class="fas fa-tasks footer-icon"></i>
+                Flow
+              </h5>
+              <p class="footer-description">
+                Gerenciador de tarefas acadêmico inspirado no Todoist. Projeto
+                desenvolvido para fins educacionais.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h6 class="footer-subtitle">Páginas</h6>
+            <ul class="footer-list">
+              <li><a href="index.html" class="footer-link">Início</a></li>
+              <li><a href="tasks.html" class="footer-link">Tarefas</a></li>
+              <li><a href="login.html" class="footer-link">Login</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h6 class="footer-subtitle">Projeto</h6>
+            <ul class="footer-list">
+              <li>UTFPR - Acadêmico</li>
+              <li>Inspirado no Todoist</li>
+              <li>2025</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="footer-divider" />
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="footer-copyright">
+              © 2025 Flow. Projeto acadêmico - Todos os direitos reservados.
+            </p>
+          </div>
+          <div class="col-md-6 text-end">
+            <a href="https://todoist.com" target="_blank" class="footer-link">
+              <i class="fas fa-external-link-alt"></i>
+              Inspiração: Todoist
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
