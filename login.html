@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Flow - Login e Cadastro" />
+    <meta name="keywords" content="login, cadastro, autenticação, flow" />
+    <meta name="author" content="Aluno UTFPR" />
+
+    <title>Login - Flow</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS  -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Barra de navegação -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top main-navbar">
+      <div class="container">
+        <a class="navbar-brand brand-logo" href="index.html">
+          <i class="fas fa-tasks brand-icon"></i>
+          <span class="brand-text">Flow</span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+                <i class="fas fa-home nav-icon"></i>
+                Início
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tasks.html">
+                <i class="fas fa-list-check nav-icon"></i>
+                Tarefas
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="login.html">
+                <i class="fas fa-user nav-icon"></i>
+                Login
+              </a>
+            </li>
+          </ul>
+
+          <div class="navbar-nav">
+            <button class="btn btn-primary-custom" id="toggle-form-btn">
+              <i class="fas fa-user-plus button-icon"></i>
+              Criar Conta
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="auth-section">
+        <div class="container">
+          <div class="row min-vh-100 align-items-center">
+            <!-- lado esquerdo -->
+            <div class="col-lg-6 d-none d-lg-block">
+              <div
+                class="auth-branding text-center animate__animated animate__fadeInLeft"
+              >
+                <div class="auth-brand-icon">
+                  <i class="fas fa-tasks"></i>
+                </div>
+                <h2 class="auth-brand-title">Flow</h2>
+                <p class="auth-brand-description">
+                  Organize suas tarefas acadêmicas com simplicidade e eficiência
+                </p>
+
+                <div class="auth-features">
+                  <div class="auth-feature-item">
+                    <i class="fas fa-check-circle auth-feature-icon"></i>
+                    <span>Interface moderna e intuitiva</span>
+                  </div>
+                  <div class="auth-feature-item">
+                    <i class="fas fa-mobile-alt auth-feature-icon"></i>
+                    <span>Acesso em qualquer dispositivo</span>
+                  </div>
+                  <div class="auth-feature-item">
+                    <i class="fas fa-save auth-feature-icon"></i>
+                    <span>Dados sincronizados e seguros</span>
+                  </div>
+                  <div class="auth-feature-item">
+                    <i class="fas fa-graduation-cap auth-feature-icon"></i>
+                    <span>Focado em necessidades acadêmicas</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- lado direito - formulario -->
+            <div class="col-lg-6">
+              <div
+                class="auth-forms-container animate__animated animate__fadeInRight"
+              >
+                <!-- Login -->
+                <div class="auth-form-wrapper" id="login-form-wrapper">
+                  <div class="card auth-card">
+                    <div class="card-body">
+                      <div class="text-center mb-4">
+                        <h3 class="auth-form-title">Bem-vindo de volta!</h3>
+                        <p class="auth-form-description">
+                          Entre na sua conta para continuar
+                        </p>
+                      </div>
+
+                      <form id="login-form" class="auth-form">
+                        <div class="form-group">
+                          <label
+                            for="login-email"
+                            class="form-label required-field"
+                            >E-mail</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-text">
+                              <i class="fas fa-envelope"></i>
+                            </span>
+                            <input
+                              type="email"
+                              class="form-control"
+                              id="login-email"
+                              name="email"
+                              placeholder="seu@email.com"
+                              required
+                              autocomplete="email"
+                            />
+                            <div class="form-feedback"></div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label
+                            for="login-password"
+                            class="form-label required-field"
+                            >Senha</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-text">
+                              <i class="fas fa-lock"></i>
+                            </span>
+                            <input
+                              type="password"
+                              class="form-control"
+                              id="login-password"
+                              name="password"
+                              placeholder="Sua senha"
+                              required
+                              minlength="6"
+                              autocomplete="current-password"
+                            />
+                            <button
+                              class="btn btn-outline-secondary password-toggle"
+                              type="button"
+                            >
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </div>
+                          <div class="form-feedback"></div>
+                        </div>
+
+                        <div class="form-group">
+                          <!-- Checkbox -->
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="remember-me"
+                              name="remember"
+                            />
+                            <label class="form-check-label" for="remember-me">
+                              Lembrar de mim
+                            </label>
+                          </div>
+                        </div>
+
+                        <button
+                          type="submit"
+                          class="btn btn-primary-custom w-100 mb-3"
+                        >
+                          <i class="fas fa-sign-in-alt button-icon"></i>
+                          Entrar
+                        </button>
+
+                        <div class="text-center">
+                          <p class="auth-switch-text">
+                            Não tem uma conta?
+                            <a
+                              href="#"
+                              class="auth-switch-link"
+                              id="show-register"
+                              >Criar conta</a
+                            >
+                          </p>
+                        </div>
+
+                        <div class="alert alert-info auth-demo-info">
+                          <h6>
+                            <i class="fas fa-info-circle"></i> Credenciais de
+                            Teste:
+                          </h6>
+                          <small>
+                            <strong>Email:</strong> demo@flow.com<br />
+                            <strong>Senha:</strong> demo123
+                          </small>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Registro -->
+                <div
+                  class="auth-form-wrapper d-none"
+                  id="register-form-wrapper"
+                >
+                  <div class="card auth-card">
+                    <div class="card-body">
+                      <div class="text-center mb-4">
+                        <h3 class="auth-form-title">Criar Conta</h3>
+                        <p class="auth-form-description">
+                          Junte-se ao Flow e organize suas tarefas
+                        </p>
+                      </div>
+
+                      <form id="register-form" class="auth-form">
+                        <div class="form-group">
+                          <label
+                            for="register-name"
+                            class="form-label required-field"
+                            >Nome Completo</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="register-name"
+                            name="name"
+                            placeholder="Seu nome completo"
+                            required
+                            minlength="2"
+                            maxlength="50"
+                          />
+                          <div class="form-feedback"></div>
+                        </div>
+
+                        <div class="form-group">
+                          <label
+                            for="register-email"
+                            class="form-label required-field"
+                            >E-mail</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-text">
+                              <i class="fas fa-envelope"></i>
+                            </span>
+                            <input
+                              type="email"
+                              class="form-control"
+                              id="register-email"
+                              name="email"
+                              placeholder="seu@email.com"
+                              required
+                              autocomplete="email"
+                            />
+                          </div>
+                          <div class="form-feedback"></div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label
+                                for="register-password"
+                                class="form-label required-field"
+                                >Senha</label
+                              >
+                              <div class="input-group">
+                                <span class="input-group-text">
+                                  <i class="fas fa-lock"></i>
+                                </span>
+                                <input
+                                  type="password"
+                                  class="form-control"
+                                  id="register-password"
+                                  name="password"
+                                  placeholder="Sua senha"
+                                  required
+                                  minlength="6"
+                                  autocomplete="new-password"
+                                />
+                                <button
+                                  class="btn btn-outline-secondary password-toggle"
+                                  type="button"
+                                >
+                                  <i class="fas fa-eye"></i>
+                                </button>
+                              </div>
+                              <div class="form-feedback"></div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label
+                                for="register-confirm-password"
+                                class="form-label required-field"
+                                >Confirmar Senha</label
+                              >
+                              <input
+                                type="password"
+                                class="form-control"
+                                id="register-confirm-password"
+                                name="confirmPassword"
+                                placeholder="Confirme sua senha"
+                                required
+                                minlength="6"
+                              />
+                              <div class="form-feedback"></div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="terms-accept"
+                              name="terms"
+                              required
+                            />
+                            <label class="form-check-label" for="terms-accept">
+                              Aceito os
+                              <a href="#" class="auth-link">termos de uso</a> e
+                              <a href="#" class="auth-link"
+                                >política de privacidade</a
+                              >
+                            </label>
+                          </div>
+                          <div class="form-feedback"></div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="newsletter-subscribe"
+                              name="newsletter"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="newsletter-subscribe"
+                            >
+                              Quero receber dicas de produtividade por email
+                            </label>
+                          </div>
+                        </div>
+
+                        <button
+                          type="submit"
+                          class="btn btn-primary-custom w-100 mb-3"
+                        >
+                          <i class="fas fa-user-plus button-icon"></i>
+                          Criar Conta
+                        </button>
+
+                        <div class="text-center">
+                          <p class="auth-switch-text">
+                            Já tem uma conta?
+                            <a href="#" class="auth-switch-link" id="show-login"
+                              >Fazer login</a
+                            >
+                          </p>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="footer-brand">
+              <h5 class="footer-title">
+                <i class="fas fa-tasks footer-icon"></i>
+                Flow
+              </h5>
+              <p class="footer-description">
+                Gerenciador de tarefas acadêmico inspirado no Todoist. Projeto
+                desenvolvido para fins educacionais.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h6 class="footer-subtitle">Páginas</h6>
+            <ul class="footer-list">
+              <li><a href="index.html" class="footer-link">Início</a></li>
+              <li><a href="tasks.html" class="footer-link">Tarefas</a></li>
+              <li><a href="login.html" class="footer-link">Login</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h6 class="footer-subtitle">Projeto</h6>
+            <ul class="footer-list">
+              <li>UTFPR - Acadêmico</li>
+              <li>Inspirado no Todoist</li>
+              <li>2025</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="footer-copyright">
+              © 2025 Flow. Projeto acadêmico - Todos os direitos reservados.
+            </p>
+          </div>
+          <div class="col-md-6 text-end">
+            <a href="https://todoist.com" target="_blank" class="footer-link">
+              <i class="fas fa-external-link-alt"></i>
+              Inspiração: Todoist
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
