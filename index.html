@@ -1,385 +1,318 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flow - Gerenciador de Tarefas</title>
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet" />
-  </head>
-  <body>
-    <!-- Barra de navegação -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top main-navbar">
-      <div class="container">
-        <a class="navbar-brand brand-logo" href="index.html">
-          <i class="fas fa-tasks brand-icon"></i>
-          <span class="brand-text">Flow</span>
-        </a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Flow - Gerenciador de tarefas" />
+  <title>Flow - Gerenciador de Tarefas</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+</head>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="index.html">
-                <i class="fas fa-home nav-icon"></i>
-                Início
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="tasks.html">
-                <i class="fas fa-list-check nav-icon"></i>
-                Tarefas
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.html">
-                <i class="fas fa-user nav-icon"></i>
-                Login
-              </a>
-            </li>
-          </ul>
+<body>
+  <!-- barra de navegação -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top main-navbar">
+    <div class="container">
+      <a class="navbar-brand brand-logo" href="index.html">
+        <i class="fas fa-tasks brand-icon"></i>
+        <span class="brand-text">Flow</span>
+      </a>
 
-          <div class="navbar-nav">
-            <a href="tasks.html" class="btn btn-primary-custom">
-              <i class="fas fa-rocket button-icon"></i>
-              Começar Agora
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">
+              <i class="fas fa-home nav-icon"></i>
+              Início
             </a>
-          </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tasks.html">
+              <i class="fas fa-list-check nav-icon"></i>
+              Tarefas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">
+              <i class="fas fa-user nav-icon"></i>
+              Login
+            </a>
+          </li>
+        </ul>
+
+        <div class="navbar-nav">
+          <a href="tasks.html" class="btn btn-primary-custom">
+            <i class="fas fa-rocket button-icon"></i>
+            Começar Agora
+          </a>
         </div>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <main class="main-content">
-      <!-- Hero -->
-      <section class="hero-section">
-        <div class="container">
-          <div class="row align-items-center min-vh-100">
-            <div class="col-lg-6">
-              <div class="hero-content animate__animated animate__fadeInLeft">
-                <h1 class="hero-title">
-                  Organize suas tarefas com
-                  <span class="text-primary">fluidez</span>
-                </h1>
-                <p class="hero-description">
-                  Flow é um gerenciador de tarefas acadêmico inspirado no Todoist. Simples, elegante e funcional.
-                </p>
-                <div class="hero-features">
-                  <div class="feature-item">
-                    <i class="fas fa-check-circle feature-icon"></i>
-                    <span>Interface intuitiva</span>
-                  </div>
-                  <div class="feature-item">
-                    <i class="fas fa-mobile-alt feature-icon"></i>
-                    <span>Para todos os dispositivos</span>
-                  </div>
-                  <div class="feature-item">
-                    <i class="fas fa-save feature-icon"></i>
-                    <span>Armazene suas tarefas</span>
-                  </div>
-                  <div class="feature-item">
-                    <i class="fas fa-sync-alt feature-icon"></i>
-                    <span>Crie e recrie suas tarefas</span>
-                  </div>
-                </div>
-                <div class="hero-actions">
-                  <a
-                    href="tasks.html"
-                    class="btn btn-primary-custom btn-lg me-3">
-                    <i class="fas fa-rocket button-icon"></i>
-                    Começar Agora
-                  </a>
-                  <a href="login.html" class="btn btn-outline-secondary btn-lg">
-                    <i class="fas fa-user button-icon"></i>
-                    Fazer Login
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="hero-image animate__animated animate__fadeInRight">
-                <!-- imagem -->
-                <picture class="responsive-image-container">
-                  <source
-                    media="(max-width: 768px)"
-                    srcset="assets/images/hero-task-preview.svg"
-                    type="image/svg+xml" />
-                  <img
-                    src="assets/images/hero-task-preview.svg"
-                    alt="Preview do aplicativo Flow de gerenciamento de tarefas"
-                    class="hero-image-element"
-                    loading="lazy" />
-                </picture>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- recursos -->
-      <section class="features-section">
-        <div class="container">
-          <div class="text-center section-header">
-            <h2 class="section-title">Por que escolher o Flow?</h2>
-            <p class="section-description">
-              Recursos essenciais para organizar suas tarefas acadêmicas
-            </p>
-          </div>
-
-          <!-- sistema de grid do Bootstrap  -->
-          <div class="row g-4">
-            <div class="col-md-6 col-lg-4">
-              <div class="feature-card card h-100">
-                <div class="card-body text-center">
-                  <div class="feature-icon-wrapper">
-                    <i class="fas fa-list-check feature-card-icon"></i>
-                  </div>
-                  <h4 class="card-title">Gestão Simples</h4>
-                  <p class="card-text">
-                    Interface limpa para organizar todas as suas tarefas
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-              <div class="feature-card card h-100">
-                <div class="card-body text-center">
-                  <div class="feature-icon-wrapper">
-                    <i class="fas fa-mobile-alt feature-card-icon"></i>
-                  </div>
-                  <h4 class="card-title">Qualquer lugar</h4>
-                  <p class="card-text">
-                    Funciona para dispositivos em desktop, tablet e celular
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-              <div class="feature-card card h-100">
-                <div class="card-body text-center">
-                  <div class="feature-icon-wrapper">
-                    <i class="fas fa-database feature-card-icon"></i>
-                  </div>
-                  <h4 class="card-title">Armazenamento Prático</h4>
-                  <p class="card-text">
-                    Acesse suas tarefas salvas com facilidade e sem complicações
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-              <div class="feature-card card h-100">
-                <div class="card-body text-center">
-                  <div class="feature-icon-wrapper">
-                    <i class="fas fa-shield-alt feature-card-icon"></i>
-                  </div>
-                  <h4 class="card-title">Segurança Robusta</h4>
-                  <p class="card-text">
-                    Proteja suas tarefas com confiança e segurança no Flow
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-              <div class="feature-card card h-100">
-                <div class="card-body text-center">
-                  <div class="feature-icon-wrapper">
-                    <i class="fas fa-search feature-card-icon"></i>
-                  </div>
-                  <h4 class="card-title">Busca Inteligente</h4>
-                  <p class="card-text">
-                    Filtros avançados por status, prioridade e busca textual
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-              <div class="feature-card card h-100">
-                <div class="card-body text-center">
-                  <div class="feature-icon-wrapper">
-                    <i class="fas fa-graduation-cap feature-card-icon"></i>
-                  </div>
-                  <h4 class="card-title">Foco Acadêmico</h4>
-                  <p class="card-text">
-                    Ajuda para necessidades acadêmicas e educacionais
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- seção tecnologias usadas -->
-      <section class="tech-section">
-        <div class="container">
-          <div class="text-center section-header">
-            <h2 class="section-title">Tecnologias Utilizadas</h2>
-            <p class="section-description">
-              Stack moderno para desenvolvimento web acadêmico
-            </p>
-          </div>
-
-          <div class="row g-4 justify-content-center">
-            <div class="col-6 col-md-4 col-lg-2">
-              <div class="tech-item text-center">
-                <i class="fab fa-html5 tech-icon" style="color: #e34f26"></i>
-                <h6 class="tech-name">HTML5</h6>
-              </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2">
-              <div class="tech-item text-center">
-                <i class="fab fa-css3-alt tech-icon" style="color: #1572b6"></i>
-                <h6 class="tech-name">CSS3</h6>
-              </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2">
-              <div class="tech-item text-center">
-                <i
-                  class="fab fa-bootstrap tech-icon"
-                  style="color: #7952b3"></i>
-                <h6 class="tech-name">Bootstrap</h6>
-              </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2">
-              <div class="tech-item text-center">
-                <i
-                  class="fab fa-js-square tech-icon"
-                  style="color: #f7df1e"></i>
-                <h6 class="tech-name">JavaScript</h6>
-              </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2">
-              <div class="tech-item text-center">
-                <i class="fas fa-server tech-icon" style="color: #68217a"></i>
-                <h6 class="tech-name">JSON Server</h6>
-              </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-2">
-              <div class="tech-item text-center">
-                <i class="fab fa-node-js tech-icon" style="color: #68a063"></i>
-                <h6 class="tech-name">Node.js</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer-section">
+  <main class="main-content">
+    <!-- hero -->
+    <section class="hero-section">
       <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="footer-brand">
-              <h5 class="footer-title">
-                <i class="fas fa-tasks footer-icon"></i>
-                Flow
-              </h5>
-              <p class="footer-description">
-                Gerenciador de tarefas inspirado no Todoist. Projeto desenvolvido para fins educacionais.
+        <div class="row align-items-center min-vh-100">
+          <div class="col-lg-6">
+            <div class="hero-content animate__animated animate__fadeInLeft">
+              <h1 class="hero-title">
+                Organize suas tarefas com
+                <span class="text-primary">fluidez</span>
+              </h1>
+              <p class="hero-description">
+                Flow é um gerenciador de tarefas inspirado no Todoist. Simples, elegante e funcional.
               </p>
+              <div class="hero-features">
+                <div class="feature-item">
+                  <i class="fas fa-check-circle feature-icon"></i>
+                  <span>Interface intuitiva</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-mobile-alt feature-icon"></i>
+                  <span>Use em qualquer dispositivo</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-save feature-icon"></i>
+                  <span>Guarde suas tarefas</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-graduation-cap feature-icon"></i>
+                  <span>Foco acadêmico</span>
+                </div>
+              </div>
+              <div class="hero-actions">
+                <a href="tasks.html" class="btn btn-primary-custom btn-lg me-3">
+                  <i class="fas fa-rocket button-icon"></i>
+                  Começar Agora
+                </a>
+                <a href="login.html" class="btn btn-outline-secondary btn-lg">
+                  <i class="fas fa-user button-icon"></i>
+                  Fazer Login
+                </a>
+              </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <h6 class="footer-subtitle">Páginas</h6>
-            <ul class="footer-list">
-              <li><a href="index.html" class="footer-link">Início</a></li>
-              <li><a href="tasks.html" class="footer-link">Tarefas</a></li>
-              <li><a href="login.html" class="footer-link">Login</a></li>
-            </ul>
-          </div>
-          <div class="col-md-3">
-            <h6 class="footer-subtitle">Tecnologias</h6>
-            <ul class="footer-list">
-              <li>Bootstrap 5</li>
-              <li>jQuery</li>
-              <li>JSON Server</li>
-              <li>Web Storage</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <p class="footer-copyright">
-              © 2025 Flow. Projeto acadêmico - Todos os direitos reservados.
-            </p>
-          </div>
-          <div class="col-md-6 text-end">
-            <a href="https://todoist.com" target="_blank" class="footer-link">
-              <i class="fas fa-external-link-alt"></i>
-              Inspiração: Todoist
-            </a>
+          <div class="col-lg-6">
+            <div class="hero-image animate__animated animate__fadeInRight">
+              <!-- imagem -->
+              <picture class="responsive-image-container">
+                <source media="(max-width: 768px)" srcset="assets/images/hero-task-preview.svg" type="image/svg+xml" />
+                <img src="assets/images/hero-task-preview.svg"
+                  alt="Preview do aplicativo Flow de gerenciamento de tarefas" class="hero-image-element"
+                  loading="lazy" />
+              </picture>
+            </div>
           </div>
         </div>
       </div>
-    </footer>
+    </section>
 
-    <!-- JavaScript e Jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- recursos -->
+    <section class="features-section">
+      <div class="container">
+        <div class="text-center section-header">
+          <h2 class="section-title">Por que escolher o Flow?</h2>
+          <p class="section-description">
+            Recursos essenciais para organizar suas tarefas acadêmicas
+          </p>
+        </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- sistema de grid bootstrap -->
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card card h-100">
+              <div class="card-body text-center">
+                <div class="feature-icon-wrapper">
+                  <i class="fas fa-list-check feature-card-icon"></i>
+                </div>
+                <h4 class="card-title">Simples</h4>
+                <p class="card-text">
+                  Interface limpa para organizar todas as suas tarefas
+                </p>
+              </div>
+            </div>
+          </div>
 
-    <script>
-      $(document).ready(function () {
-        $('a[href^="#"]').on("click", function (event) {
-          const target = $(this.getAttribute("href"));
-          if (target.length) {
-            event.preventDefault();
-            $("html, body")
-              .stop()
-              .animate(
-                {
-                  scrollTop: target.offset().top - 80,
-                },
-                1000,
-              );
-          }
-        });
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card card h-100">
+              <div class="card-body text-center">
+                <div class="feature-icon-wrapper">
+                  <i class="fas fa-mobile-alt feature-card-icon"></i>
+                </div>
+                <h4 class="card-title">Responsivo</h4>
+                <p class="card-text">
+                  Funciona perfeitamente em diversos dispositivos
+                </p>
+              </div>
+            </div>
+          </div>
 
-        // Navbar
-        $(window).on("scroll", function () {
-          const navbar = $(".main-navbar");
-          if ($(window).scrollTop() > 50) {
-            navbar.addClass("scrolled");
-          } else {
-            navbar.removeClass("scrolled");
-          }
-        });
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card card h-100">
+              <div class="card-body text-center">
+                <div class="feature-icon-wrapper">
+                  <i class="fas fa-database feature-card-icon"></i>
+                </div>
+                <h4 class="card-title">Armazenamento</h4>
+                <p class="card-text">
+                  Seus dados ficam salvos e armazenados
+                </p>
+              </div>
+            </div>
+          </div>
 
-        // Animação de entrada
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                $(entry.target).addClass("animate__animated animate__fadeInUp");
-              }
-            });
-          },
-          { threshold: 0.1 },
-        );
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card card h-100">
+              <div class="card-body text-center">
+                <div class="feature-icon-wrapper">
+                  <i class="fas fa-shield-alt feature-card-icon"></i>
+                </div>
+                <h4 class="card-title">Segurança</h4>
+                <p class="card-text">
+                  Suas tarefas ficam protegidas e seguras
+                </p>
+              </div>
+            </div>
+          </div>
 
-        $(".feature-card").each(function () {
-          observer.observe(this);
-        });
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card card h-100">
+              <div class="card-body text-center">
+                <div class="feature-icon-wrapper">
+                  <i class="fas fa-search feature-card-icon"></i>
+                </div>
+                <h4 class="card-title">Busca</h4>
+                <p class="card-text">
+                  Filtros avançados por status, prioridade e busca
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card card h-100">
+              <div class="card-body text-center">
+                <div class="feature-icon-wrapper">
+                  <i class="fas fa-graduation-cap feature-card-icon"></i>
+                </div>
+                <h4 class="card-title">Foco</h4>
+                <p class="card-text">
+                  Desenvolvido para necessidades acadêmicas e profissionais
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="footer-brand">
+            <h5 class="footer-title">
+              <i class="fas fa-tasks footer-icon"></i>
+              Flow
+            </h5>
+            <p class="footer-description">
+              Gerenciador de tarefas inspirado no Todoist. Projeto desenvolvido para fins educacionais.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <h6 class="footer-subtitle">Páginas</h6>
+          <ul class="footer-list">
+            <li><a href="index.html" class="footer-link">Início</a></li>
+            <li><a href="tasks.html" class="footer-link">Tarefas</a></li>
+            <li><a href="login.html" class="footer-link">Login</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6 class="footer-subtitle">Tecnologias</h6>
+          <ul class="footer-list">
+            <li>Bootstrap 5</li>
+            <li>jQuery</li>
+            <li>JSON Server</li>
+            <li>Web Storage</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="footer-copyright">
+            © 2025 Flow. Projeto acadêmico - Todos os direitos reservados.
+          </p>
+        </div>
+        <div class="col-md-6 text-end">
+          <a href="https://todoist.com" target="_blank" class="footer-link">
+            <i class="fas fa-external-link-alt"></i>
+            Inspiração: Todoist
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('a[href^="#"]').on("click", function (event) {
+        const target = $(this.getAttribute("href"));
+        if (target.length) {
+          event.preventDefault();
+          $("html, body")
+            .stop()
+            .animate(
+              {
+                scrollTop: target.offset().top - 80,
+              },
+              1000,
+            );
+        }
       });
-    </script>
-  </body>
+
+      $(window).on("scroll", function () {
+        const navbar = $(".main-navbar");
+        if ($(window).scrollTop() > 50) {
+          navbar.addClass("scrolled");
+        } else {
+          navbar.removeClass("scrolled");
+        }
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              $(entry.target).addClass("animate__fadeInUp");
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      $(".feature-card").each(function () {
+        observer.observe(this);
+      });
+    });
+  </script>
+</body>
+
 </html>
