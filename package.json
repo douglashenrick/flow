@@ -1,7 +1,7 @@
 {
   "name": "flow",
   "version": "1.0.0",
-  "description": "O Flow é um aplicação web para gerenciamento de tarefas pessoais, com foco em simplicidade e produtividade.",
+  "description": "O Flow é um aplicação web para gerenciamento de tarefas.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
