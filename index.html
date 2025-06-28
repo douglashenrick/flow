@@ -3,13 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Flow - Gerenciador de tarefas acadêmico inspirado no Todoist"
+    />
+    <meta
+      name="keywords"
+      content="tarefas, produtividade, organização, todoist, academia"
+    />
+    <meta name="author" content="Aluno UTFPR" />
 
     <title>Flow - Gerenciador de Tarefas</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
 
-    <!-- Bootstrap 5 -->
+    <!-- Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -32,7 +41,7 @@
       rel="stylesheet"
     />
 
-    <!--  CSS -->
+    <!--  CSS  -->
     <link href="assets/css/style.css" rel="stylesheet" />
   </head>
   <body>
@@ -86,6 +95,7 @@
     </nav>
 
     <main class="main-content">
+      <!-- Hero -->
       <section class="hero-section">
         <div class="container">
           <div class="row align-items-center min-vh-100">
@@ -134,6 +144,7 @@
             </div>
             <div class="col-lg-6">
               <div class="hero-image animate__animated animate__fadeInRight">
+                <!-- imagem -->
                 <picture class="responsive-image-container">
                   <source
                     media="(max-width: 768px)"
@@ -153,6 +164,7 @@
         </div>
       </section>
 
+      <!-- recursos -->
       <section class="features-section">
         <div class="container">
           <div class="text-center section-header">
@@ -162,7 +174,7 @@
             </p>
           </div>
 
-          <!-- Bootstrap sistema Grid -->
+          <!-- sistema de grid do Bootstrap  -->
           <div class="row g-4">
             <div class="col-md-6 col-lg-4">
               <div class="feature-card card h-100">
@@ -257,7 +269,7 @@
         </div>
       </section>
 
-      <!-- Technology Stack Section -->
+      <!-- seção tecnologias usadas -->
       <section class="tech-section">
         <div class="container">
           <div class="text-center section-header">
@@ -313,10 +325,6 @@
           </div>
         </div>
       </section>
-
-      <section class="cta-section">
-        <div class="container" />
-      </section>
     </main>
 
     <!-- Footer -->
@@ -369,3 +377,55 @@
         </div>
       </div>
     </footer>
+
+    <!-- JavaScript e Jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $('a[href^="#"]').on("click", function (event) {
+          const target = $(this.getAttribute("href"));
+          if (target.length) {
+            event.preventDefault();
+            $("html, body")
+              .stop()
+              .animate(
+                {
+                  scrollTop: target.offset().top - 80,
+                },
+                1000,
+              );
+          }
+        });
+
+        // Navbar
+        $(window).on("scroll", function () {
+          const navbar = $(".main-navbar");
+          if ($(window).scrollTop() > 50) {
+            navbar.addClass("scrolled");
+          } else {
+            navbar.removeClass("scrolled");
+          }
+        });
+
+        // Animação de entrada
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                $(entry.target).addClass("animate__animated animate__fadeInUp");
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        $(".feature-card").each(function () {
+          observer.observe(this);
+        });
+      });
+    </script>
+  </body>
+</html>
