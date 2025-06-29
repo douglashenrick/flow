@@ -4,6 +4,9 @@
   "description": "O Flow é um aplicação web para gerenciamento de tarefas.",
   "main": "index.js",
   "scripts": {
+    "dev": "live-server --port=5500",
+    "json:server": "json-server --watch db.json",
+    "json:server:routes": "json-server --watch db.json --port=3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +24,8 @@
     "jquery": "^3.7.1"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "gh-pages": "^6.3.0",
+    "json-server": "^1.0.0-beta.3",
+    "live-server": "^1.2.2"
   }
 }
