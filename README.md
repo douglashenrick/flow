@@ -62,31 +62,36 @@ Flow é um gerenciador de tarefas inspirado no Todoist, desenvolvido como projet
 
 ```bash
 git clone
+```
+
+2. **Acessar o diretório do projeto**
+
+```bash
 cd flow
 ```
 
-2. **Instale as dependências**
+3. **Instalar dependências**
 
 ```bash
 npm install
 ```
 
-3. **Execute o servidor de desenvolvimento**
+4. **Executar a API Fake (JSON Server)**
 
+Em um terminal
 ```bash
-npm run 
+npm run json:server
 ```
+A API estará disponível em: http://localhost:3000/tasks
 
-4. **Execute a API fake (em outro terminal)**
 
+5. **Executar o frontend**
+
+Em outro terminal:
 ```bash
-npm run
+npm run dev
 ```
-
-5. **Acesse a aplicação**
-
-- Frontend: http://localhost:3000
-- API: http://localhost:3001
+O frontend abrirá automaticamente em: http://localhost:5500
 
 
 ## Telas da aplicação
