@@ -6,7 +6,6 @@ const APP_CONFIG = {
   REGEX_PATTERNS: {
     EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
     DATE: /^\d{4}-\d{2}-\d{2}$/,
-    PHONE: /^\(\d{2}\) \d{5}-\d{4}$/,
   },
 };
 
@@ -185,7 +184,6 @@ const validation = {
   rules: {
     required: (value) => value.trim() !== "",
     email: (value) => APP_CONFIG.REGEX_PATTERNS.EMAIL.test(value),
-    phone: (value) => APP_CONFIG.REGEX_PATTERNS.PHONE.test(value),
     minLength: (value, min) => value.length >= min,
     maxLength: (value, max) => value.length <= max,
     date: (value) =>
@@ -196,7 +194,6 @@ const validation = {
   messages: {
     required: "Este campo é obrigatório",
     email: "Por favor, insira um email válido",
-    phone: "Por favor, insira um telefone válido: (00) 00000-0000",
     minLength: (min) => `Mínimo de ${min} caracteres`,
     maxLength: (max) => `Máximo de ${max} caracteres`,
     date: "Por favor, insira uma data válida",
@@ -221,11 +218,6 @@ const validation = {
       // verifica o  email
       if (type === "email" && !validation.rules.email(value)) {
         errors.push(validation.messages.email);
-      }
-
-      // verifica o telefone
-      if (type === "tel" && !validation.rules.phone(value)) {
-        errors.push(validation.messages.phone);
       }
 
       // verifica data
