@@ -48,13 +48,13 @@ const utils = {
   },
 
   notify: (message) => {
-    const notification = document.createElement("div");
-    notification.className = "alert alert-success position-fixed";
-    notification.style.cssText = "top: 100px; right: 20px; z-index: 9999;";
-    notification.textContent = message;
-
-    document.body.appendChild(notification);
-    setTimeout(() => notification.remove(), 3000);
+    $(
+      '<div class="alert alert-success position-fixed" style="top:100px;right:20px;z-index:9999">',
+    )
+      .text(message)
+      .appendTo("body")
+      .delay(3000)
+      .fadeOut();
   },
 };
 
@@ -321,17 +321,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Filtros simples
-  document.querySelectorAll("[data-filter]").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const filter = this.dataset.filter;
-      taskManager.filter(filter);
-
-      // Atualiza botões ativos
-      document
-        .querySelectorAll("[data-filter]")
-        .forEach((b) => b.classList.remove("active"));
-      this.classList.add("active");
+  // Filtros simples com jQuery
+  $(document).ready(() => {
+    $("[data-filter]").click(function () {
+      $(this).addClass("active").siblings().removeClass("active");
+      taskManager.filter($(this).data("filter"));
     });
   });
 
