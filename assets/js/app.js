@@ -1,28 +1,20 @@
-// Configuração básica
 const APP_CONFIG = {
   STORAGE_KEY: "flow_tasks",
-  REGEX_EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-  REGEX_DATE: /^\d{4}-\d{2}-\d{2}$/,
+  REGEX_EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  REGEX_DATE: /^\d{2}\/\d{2}\/\d{4}$/,
 };
 
-// Estado global
 let tasks = [];
 let currentFilter = "all";
 
-// Utilitários básicos
 const utils = {
   generateId: () => Date.now().toString(36),
 
-  formatDate: (date) => {
-    if (!date) return "";
-    return new Date(date).toLocaleDateString("pt-BR");
-  },
-
   getRelativeTime: (dateStr) => {
     if (!dateStr) return "";
-    const now = new Date();
-    const date = new Date(dateStr);
-    const diffDays = Math.ceil((date - now) / (1000 * 60 * 60 * 24));
+    const diffDays = Math.ceil(
+      (new Date(dateStr) - new Date()) / (1000 * 60 * 60 * 24),
+    );
 
     if (diffDays === 0) return "Hoje";
     if (diffDays === 1) return "Amanhã";
@@ -30,27 +22,18 @@ const utils = {
     if (diffDays > 1) return `Em ${diffDays} dias`;
     if (diffDays < -1) return `${Math.abs(diffDays)} dias atrás`;
 
-    return utils.formatDate(dateStr);
+    return new Date(dateStr).toLocaleDateString("pt-BR");
   },
 
   isOverdue: (dateStr) => {
     if (!dateStr) return false;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const dueDate = new Date(dateStr);
-    return dueDate < today;
-  },
-
-  sanitize: (str) => {
-    const div = document.createElement("div");
-    div.textContent = str;
-    return div.innerHTML;
+    return new Date(dateStr) < today;
   },
 
   notify: (message) => {
-    $(
-      '<div class="alert alert-success position-fixed" style="top:100px;right:20px;z-index:9999">',
-    )
+    $('<div class="alert alert-success notification-success">')
       .text(message)
       .appendTo("body")
       .delay(3000)
@@ -58,7 +41,7 @@ const utils = {
   },
 };
 
-// Storage simples
+// Storage
 const storage = {
   save: () =>
     localStorage.setItem(APP_CONFIG.STORAGE_KEY, JSON.stringify(tasks)),
@@ -67,60 +50,37 @@ const storage = {
     return data
       ? JSON.parse(data)
       : [
-          {
-            id: "1",
-            title: "Estudar para prova de matemática",
-            description: "Revisar capítulos 1-3",
-            category: "Acadêmico",
-            priority: "high",
-            dueDate: "2025-01-20",
-            status: "pending",
-          },
-          {
-            id: "2",
-            title: "Finalizar projeto da disciplina",
-            description: "Sistema de tarefas",
-            category: "Acadêmico",
-            priority: "high",
-            dueDate: "2025-01-15",
-            status: "completed",
-          },
-        ];
+        {
+          id: "1",
+          title: "Finalizar projeto da disciplina",
+          description: "Sistema de tarefas",
+          category: "Acadêmico",
+          priority: "high",
+          dueDate: "2025-07-06",
+          status: "completed",
+        },
+      ];
   },
 };
 
-// Validação simples
+// Validação
 const validation = {
   validateField: (field) => {
-    const errors = [];
     const value = field.value.trim();
+    if (field.required && !value) return ["Campo obrigatório"];
+    if (field.type === "email" && value && !APP_CONFIG.REGEX_EMAIL.test(value))
+      return ["Email inválido"];
 
-    if (field.required && !value) {
-      errors.push("Campo obrigatório");
+    if (field.id === "task-due-date" && value) {
+      if (!APP_CONFIG.REGEX_DATE.test(value))
+        return ["Data inválida (use dd/mm/aaaa)"];
+      const [day, month, year] = value.split("/");
+      const selectedDate = new Date(year, month - 1, day);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (selectedDate < today) return ["Data deve ser futura"];
     }
-
-    if (
-      field.type === "email" &&
-      value &&
-      !APP_CONFIG.REGEX_EMAIL.test(value)
-    ) {
-      errors.push("Email inválido");
-    }
-
-    if (field.type === "date" && value) {
-      if (!APP_CONFIG.REGEX_DATE.test(value)) {
-        errors.push("Data inválida");
-      } else {
-        const selectedDate = new Date(value);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        if (selectedDate < today) {
-          errors.push("Data deve ser futura");
-        }
-      }
-    }
-
-    return errors;
+    return [];
   },
 
   showFeedback: (field, errors) => {
@@ -140,19 +100,18 @@ const validation = {
 
   validateForm: (form) => {
     let isValid = true;
-    const fields = form.querySelectorAll("input[required], textarea[required]");
-
-    fields.forEach((field) => {
-      const errors = validation.validateField(field);
-      validation.showFeedback(field, errors);
-      if (errors.length > 0) isValid = false;
-    });
-
+    form
+      .querySelectorAll("input[required], textarea[required]")
+      .forEach((field) => {
+        const errors = validation.validateField(field);
+        validation.showFeedback(field, errors);
+        if (errors.length > 0) isValid = false;
+      });
     return isValid;
   },
 };
 
-// Gerenciador de tarefas simplificado
+// Gerenciador de tarefas
 const taskManager = {
   init: () => {
     tasks = storage.load();
@@ -161,13 +120,21 @@ const taskManager = {
   },
 
   create: (data) => {
+    let dueDate = data.dueDate || null;
+
+    // Converte data
+    if (dueDate && APP_CONFIG.REGEX_DATE.test(dueDate)) {
+      const [day, month, year] = dueDate.split("/");
+      dueDate = `${year}-${month}-${day}`;
+    }
+
     const task = {
       id: utils.generateId(),
       title: data.title,
       description: data.description || "",
       category: data.category || "Acadêmico",
       priority: data.priority || "medium",
-      dueDate: data.dueDate || null,
+      dueDate: dueDate,
       status: "pending",
     };
 
@@ -233,22 +200,21 @@ const taskManager = {
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-start">
             <div class="flex-grow-1">
-              <h5 class="${task.status === "completed" ? "text-decoration-line-through text-muted" : ""}">${utils.sanitize(task.title)}</h5>
-              ${task.description ? `<p class="text-muted small">${utils.sanitize(task.description)}</p>` : ""}
+              <h5 class="${task.status === "completed" ? "text-decoration-line-through text-muted" : ""}">${task.title}</h5>
+              ${task.description ? `<p class="text-muted small">${task.description}</p>` : ""}
               <div class="mb-2">
                 <span class="badge bg-${task.priority === "high" ? "danger" : task.priority === "medium" ? "warning" : "success"}">${task.priority === "high" ? "Alta" : task.priority === "medium" ? "Média" : "Baixa"}</span>
                 <span class="badge bg-secondary ms-1">${task.category}</span>
               </div>
-              ${
-                task.dueDate
-                  ? `
+              ${task.dueDate
+            ? `
                 <small class="text-${utils.isOverdue(task.dueDate) && task.status !== "completed" ? "danger" : "muted"} d-block">
-                  📅 ${utils.getRelativeTime(task.dueDate)}
+                  ${utils.getRelativeTime(task.dueDate)}
                   ${utils.isOverdue(task.dueDate) && task.status !== "completed" ? ' <span class="badge bg-danger">Atrasada</span>' : ""}
                 </small>
               `
-                  : ""
-              }
+            : ""
+          }
             </div>
             <div class="btn-group-vertical">
               <button class="btn btn-sm btn-outline-primary" onclick="taskManager.toggle('${task.id}')">
@@ -282,9 +248,8 @@ const taskManager = {
   },
 };
 
-// Inicialização
 document.addEventListener("DOMContentLoaded", function () {
-  // Validação em tempo real
+  // Validação
   document.addEventListener("input", function (e) {
     if (e.target.matches("input, textarea")) {
       const errors = validation.validateField(e.target);
@@ -321,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Filtros simples com jQuery
+  // Filtros simples
   $(document).ready(() => {
     $("[data-filter]").click(function () {
       $(this).addClass("active").siblings().removeClass("active");
@@ -331,7 +296,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Inicia aplicação
   taskManager.init();
-});
 
-// Exports para HTML
-window.taskManager = taskManager;
+  // jQuery Mask Plugin para campo de data
+  if ($("#task-due-date").length) {
+    $("#task-due-date").mask("00/00/0000", {
+      placeholder: "dd/mm/aaaa",
+      translation: {
+        0: { pattern: /[0-9]/ },
+      },
+    });
+  }
+});
