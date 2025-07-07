@@ -18,7 +18,7 @@ https://docs.google.com/document/d/1b2K9DI6BFw8-D_drn4jvzeAQCiT1sigCQSzG1_8OY50/
 
 ## Dependências JavaScript
 
-- **Vanilla JavaScript** (sem frameworks)
+- **JQuery**
 
 ## Checklist | Indicadores de Desempenho (ID) dos Resultados de Aprendizagem (RA)
 
@@ -46,12 +46,12 @@ https://docs.google.com/document/d/1b2K9DI6BFw8-D_drn4jvzeAQCiT1sigCQSzG1_8OY50/
 
 #### RA3 - Aplicar ferramentas para otimização do processo de desenvolvimento web, incluindo Node.js, NPM e linters para garantir a qualidade do código, juntamento com boas práticas de versionamento e organização de projetos.
 
-- [x] ID 16 - Configura adequadamente um ambiente de desenvolvimento usando Node.js e NPM para gerenciar pacotes e dependências do projeto, facilitando a instalação e o uso de bibliotecas e ferramentas de terceiros.
+- [ ] ID 16 - Configura adequadamente um ambiente de desenvolvimento usando Node.js e NPM para gerenciar pacotes e dependências do projeto, facilitando a instalação e o uso de bibliotecas e ferramentas de terceiros.
 - ~[ ] ID 17 - Utiliza linters, como ESLint ou Stylelint, para analisar e corrigir automaticamente problemas de código, incluindo erros de sintaxe, estilo e boas práticas, garantindo a qualidade e consistência do código do projeto.~
 - [x] ID 18 - Adota boas práticas de versionamento utilizando sistemas como Git e GitHub, criando e gerenciando repositórios com branches adequados ou pelo menos o branch main.
 - [x] ID 19 - Organiza o arquivo README.md conforme o template exigido na disciplina, contendo informações claras e estruturadas sobre o projeto, principalmente o checklist de tópicos devidamente preenchido.
 - ~[ ] ID 20 - Utiliza técnicas de minificação e otimização de recursos, como minificação de CSS e JavaScript e otimização de imagens, para melhorar o desempenho e o tempo de carregamento do site ou aplicação.~
-- [x] ID 21 - Organiza os arquivos do projeto em uma estrutura coerente, lógica e modular, conforme projeto de exemplo, facilitando a localização, manutenção e escalabilidade.
+- [ ] ID 21 - Organiza os arquivos do projeto em uma estrutura coerente, lógica e modular, conforme projeto de exemplo, facilitando a localização, manutenção e escalabilidade.
 - ~[ ] ID 22 - Utiliza as metodologias BEM (Block Element Modifier) ou SMACSS (Scalable and Modular Architecture for CSS) para organizar e estruturar os estilos CSS de forma eficiente, garantindo a reutilização de estilos, a legibilidade do código e a manutenção sustentável do projeto.~
 
 #### RA4 - Aplicar bibliotecas de funções e componentes em JavaScript para aprimorar a interatividade de páginas web.
@@ -89,11 +89,5 @@ npm install
 4. **Executar o frontend**
 
 ```bash
-npm run dev
+npm run start
 ```
-
-O frontend abrirá automaticamente no navegador.
-
-**Nota:** As tarefas são armazenadas no localStorage do navegador.
-
-## Telas da aplicação

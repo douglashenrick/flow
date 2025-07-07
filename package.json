@@ -4,8 +4,7 @@
   "description": "O Flow é um aplicação web para gerenciamento de tarefas.",
   "main": "index.js",
   "scripts": {
-    "dev": "live-server --port=3000",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "live-server ."
   },
   "repository": {
     "type": "git",
